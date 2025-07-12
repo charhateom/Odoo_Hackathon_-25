@@ -6,7 +6,7 @@ import SwapPage from './pages/SwapPage';
 import PrivateRoute from './components/PrivateRoute';
 import HomePage from './pages/HomePage';
 import SwapInboxPage from './pages/SwapInboxPage';
-import Header from './components/Header';
+
 import SearchPage from './pages/SearchPage';
 import UserDetailPage from './pages/UserDetailPage';
 
@@ -17,7 +17,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header />
+      
       <Routes>
         <Route path="/users/:id" element={<PrivateRoute><UserDetailPage /></PrivateRoute>} />
         <Route path="/search" element={<PrivateRoute><SearchPage /></PrivateRoute>} />

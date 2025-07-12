@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api/api';
-
+import Header from '../components/Header.jsx';
 const ProfilePage = () => {
   const [form, setForm] = useState({});
   const [loading, setLoading] = useState(true);
@@ -44,6 +44,8 @@ const ProfilePage = () => {
   if (loading) return <p>Loading...</p>;
 
   return (
+    <>
+    <Header />
     <div style={styles.container}>
       <h2 style={styles.title}>Edit Profile</h2>
 
@@ -101,6 +103,7 @@ const ProfilePage = () => {
         Save Profile
       </button>
     </div>
+    </>
   );
 };
 

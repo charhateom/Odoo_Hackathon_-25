@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import api from '../api/api';
-
+import Header from '../components/Header.jsx';
 const styles = {
   container: {
     maxWidth: '600px',
@@ -87,6 +87,8 @@ const SwapPage = () => {
   };
 
   return (
+    <>
+    <Header/>
     <div style={{ backgroundColor: '#F4F7FA', minHeight: '100vh', padding: '20px' }}>
       <div style={styles.container}>
         <h2 style={styles.heading}>Send Swap Request</h2>
@@ -137,7 +139,7 @@ const SwapPage = () => {
           </button>
         </form>
       </div>
-    </div>
+    </div></>
   );
 };
 

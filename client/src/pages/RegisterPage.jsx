@@ -23,6 +23,7 @@ const RegisterPage = () => {
   };
 
   return (
+   
     <div style={styles.page}>
       <form onSubmit={handleSubmit} style={styles.form}>
         <h2 style={styles.title}>Create Account</h2>
