@@ -65,3 +65,13 @@ exports.updateUserProfile = async (req, res) => {
     res.status(404).json({ message: 'User not found' });
   }
 };
+
+
+exports.getPublicUsers = async (req, res) => {
+  try {
+    const users = await User.find({ profileVisibility: 'Public' }).select('-password');
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};
