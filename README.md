@@ -40,11 +40,10 @@ This project was built as part of **Odoo Hackathon '25** under Problem Statement
 ---
 
 ## 🛠️ Tech Stack (Suggested)
-- **Frontend**: 
-- **Backend**: 
-- **Database**: 
-- **Auth**: 
-- **Deployment**: 
+- **Frontend**: React, Javascript, HTML, CSS
+- **Backend**: Node.js, Express.js
+- **Database**: Mongo DB
+- **Auth**: JWT
 
 ---
 
