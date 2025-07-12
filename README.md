@@ -65,12 +65,3 @@ This project was built as part of **Odoo Hackathon '25** under Problem Statement
 - AI-powered skill recommendations.
 - Gamified swap streaks for engagement.
 
----
-
-## 🧠 Team & Contributions
-
----
-
-## 📜 License
-This project is open-source under the MIT License. Contributions welcome!
-
