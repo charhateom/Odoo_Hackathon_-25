@@ -1,8 +1,13 @@
+
 import React, { useEffect, useState } from 'react';
 import api from '../api/api';
 
 const SwapInboxPage = () => {
   const [swaps, setSwaps] = useState([]);
+
+  useEffect(() => {
+    fetchSwaps();
+  }, []);
 
   const fetchSwaps = async () => {
     try {
@@ -13,14 +18,10 @@ const SwapInboxPage = () => {
     }
   };
 
-  useEffect(() => {
-    fetchSwaps();
-  }, []);
-
   const updateSwapStatus = async (id, status) => {
     try {
       await api.put(`/swaps/${id}`, { status });
-      fetchSwaps(); // Refresh
+      fetchSwaps(); // Refresh the list
     } catch (err) {
       alert('Failed to update swap');
     }
@@ -40,8 +41,17 @@ const SwapInboxPage = () => {
     <div style={{ maxWidth: '800px', margin: 'auto' }}>
       <h2>Swap Inbox</h2>
       {swaps.length === 0 && <p>No swap requests yet.</p>}
-      {swaps.map(swap => (
-        <div key={swap._id} style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px' }}>
+
+      {swaps.map((swap) => (
+        <div
+          key={swap._id}
+          style={{
+            border: '1px solid #ccc',
+            padding: '10px',
+            marginBottom: '10px',
+            borderRadius: '8px',
+          }}
+        >
           <p><strong>From:</strong> {swap.fromUser?.name}</p>
           <p><strong>To:</strong> {swap.toUser?.name}</p>
           <p><strong>Offered Skill:</strong> {swap.offeredSkill}</p>
@@ -49,29 +59,52 @@ const SwapInboxPage = () => {
           <p><strong>Message:</strong> {swap.message}</p>
           <p><strong>Status:</strong> {swap.status}</p>
 
-          {/* If current user is recipient, show accept/reject */}
-          {localStorage.getItem('token') && swap.toUser?._id === parseJwt(localStorage.getItem('token')).id && swap.status === 'Pending' && (
-            <>
-              <button onClick={() => updateSwapStatus(swap._id, 'Accepted')}>Accept</button>
-              <button onClick={() => updateSwapStatus(swap._id, 'Rejected')}>Reject</button>
-            </>
-          )}
+          <div style={{ marginTop: '10px' }}>
+            <button
+              onClick={() => updateSwapStatus(swap._id, 'Accepted')}
+              style={{
+                background: 'green',
+                color: 'white',
+                padding: '6px 12px',
+                marginRight: '10px',
+                border: 'none',
+                borderRadius: '4px',
+              }}
+            >
+              Accept
+            </button>
 
-          {/* Anyone involved can delete */}
-          <button onClick={() => deleteSwap(swap._id)} style={{ marginLeft: '10px', color: 'red' }}>Delete</button>
+            <button
+              onClick={() => updateSwapStatus(swap._id, 'Rejected')}
+              style={{
+                background: 'orange',
+                color: 'white',
+                padding: '6px 12px',
+                marginRight: '10px',
+                border: 'none',
+                borderRadius: '4px',
+              }}
+            >
+              Reject
+            </button>
+
+            <button
+              onClick={() => deleteSwap(swap._id)}
+              style={{
+                background: 'red',
+                color: 'white',
+                padding: '6px 12px',
+                border: 'none',
+                borderRadius: '4px',
+              }}
+            >
+              Delete
+            </button>
+          </div>
         </div>
       ))}
     </div>
   );
 };
-
-//Decode JWT to extract user id
-function parseJwt(token) {
-  try {
-    return JSON.parse(atob(token.split('.')[1]));
-  } catch (e) {
-    return {};
-  }
-}
 
 export default SwapInboxPage;

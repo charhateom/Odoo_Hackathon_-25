@@ -5,12 +5,13 @@ const {
   sendSwapRequest,
   getMySwaps,
   updateSwapStatus,
-  deleteSwap
+  deleteSwap,
+  getSwapById,
 } = require('../controllers/swapController');
 
 router.post('/', protect, sendSwapRequest);
 router.get('/', protect, getMySwaps);
 router.put('/:id', protect, updateSwapStatus);
 router.delete('/:id', protect, deleteSwap);
-
+router.get('/:id', protect, getSwapById);
 module.exports = router;
