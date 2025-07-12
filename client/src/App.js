@@ -8,6 +8,10 @@ import HomePage from './pages/HomePage';
 import SwapInboxPage from './pages/SwapInboxPage';
 import Header from './components/Header';
 import SearchPage from './pages/SearchPage';
+import UserDetailPage from './pages/UserDetailPage';
+
+
+
 function App() {
   const token = localStorage.getItem('token');
 
@@ -15,7 +19,7 @@ function App() {
     <BrowserRouter>
       <Header />
       <Routes>
-
+        <Route path="/users/:id" element={<PrivateRoute><UserDetailPage /></PrivateRoute>} />
         <Route path="/search" element={<PrivateRoute><SearchPage /></PrivateRoute>} />
         <Route path="/inbox" element={<PrivateRoute><SwapInboxPage /></PrivateRoute>} />        
         <Route path="/" element={<Navigate to={token ? "/profile" : "/login"} />} />
